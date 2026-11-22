@@ -74,7 +74,8 @@ admin to review, but no payment is initiated or confirmed. Follow
 ## Publishing the APK
 
 The website's Android download button points to the latest GitHub Release asset
-named `EGC-Android.apk`. Upload the APK with that asset name so the button
-serves the latest version without storing the binary in the Git repository or
-Railway build. Use the original release signing key for public updates; a
-debug-signed APK may not update an existing production installation.
+named `app-debug.apk` (display label `EGC-Android.apk`). Upload the APK with
+that asset name so the button serves the latest version without storing the
+binary in the Git repository or Railway build. Use the original release signing
+key for public updates; a debug-signed APK may not update an existing
+production installation.

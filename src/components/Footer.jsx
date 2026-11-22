@@ -139,7 +139,7 @@ export default function Footer({ dark }) {
               </div>
               {!Capacitor.isNativePlatform() && (
                 <a
-                  href="https://github.com/spartiatesupreme-dotcom/egc-mobile-/releases/latest/download/EGC-Android.apk"
+                  href="https://github.com/spartiatesupreme-dotcom/egc-mobile-/releases/latest/download/app-debug.apk"
                   download="EGC-Android.apk"
                   style={{
                     display: "inline-flex",
