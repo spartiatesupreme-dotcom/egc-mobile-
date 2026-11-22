@@ -51,13 +51,15 @@
     <li>Tests backend validés : 6 tests sur 6.</li>
     <li>API de production Railway joignable sur HTTPS.</li>
     <li>Correction publiée pour l’administration Android qui utilisait auparavant <code>localhost:8080</code>.</li>
+    <li>Nouvelle APK installable générée avec le bundle du site à jour, embarqué localement et sans dépendance au site public.</li>
+    <li>Bouton « Télécharger l’application Android » supprimé de l’accueil et de la page Invitation.</li>
   </ul>
 
   <h2>2. Architecture et fonctionnement général</h2>
   <table>
     <tr><th>Couche</th><th>Fonctionnement</th><th>État</th></tr>
     <tr><td>Frontend</td><td>React avec Vite et React Router. Les écrans sont chargés par routes et certains composants sont chargés à la demande.</td><td class="ok">Opérationnel</td></tr>
-    <tr><td>Application Android</td><td>Capacitor embarque le bundle local. L’interface de base est disponible sans WebView distant ; Internet sert aux données et mises à jour.</td><td class="ok">Configuré</td></tr>
+    <tr><td>Application Android</td><td>Capacitor embarque le bundle local à la construction. L’interface ne dépend pas d’une WebView distante ; Internet sert uniquement aux données et services réseau.</td><td class="ok">Configuré</td></tr>
     <tr><td>Backend</td><td>API Express avec authentification admin JWT, validation Zod, limitation, sécurité HTTP et CORS.</td><td class="ok">Opérationnel</td></tr>
     <tr><td>Base de données</td><td>SQLite avec migrations automatiques pour inscriptions, statuts, fonctions, annonces, dons et idempotence.</td><td class="ok">Opérationnel</td></tr>
     <tr><td>Synchronisation</td><td>Les annonces et événements sont mises en cache localement. Les requêtes d’actualisation nécessitent la connexion.</td><td class="ok">Opérationnel</td></tr>
@@ -114,7 +116,7 @@
     <p><strong>Gravité :</strong> élevée &nbsp; <strong>État :</strong> corrigé dans le code source, nouvel APK requis.</p>
     <p><strong>Cause :</strong> l’application native utilisait <code>http://localhost:8080</code>. Sur un téléphone, localhost désigne le téléphone, pas l’API Railway.</p>
     <p><strong>Correction :</strong> ajout d’une configuration API qui utilise automatiquement l’URL Railway sur Capacitor et localhost uniquement en développement web.</p>
-    <p><strong>Correction livrée :</strong> un nouvel APK Android version 1.1 a été généré avec le bundle local et l’URL API native corrigée.</p>
+    <p><strong>Correction livrée :</strong> un nouvel APK Android installable a été généré avec le bundle local et l’URL API native corrigée.</p>
   </div>
   <div class="bug">
     <h3>BUG-002 — Demande de prière non encore implémentée</h3>
@@ -133,8 +135,8 @@
   </div>
   <div class="bug">
     <h3>BUG-005 — APK à régénérer après les corrections</h3>
-    <p><strong>Gravité :</strong> élevée pour la distribution &nbsp; <strong>État :</strong> corrigé pour la nouvelle APK.</p>
-    <p>Le code source est à jour sur GitHub et une nouvelle APK version 1.1 a été générée. Une application déjà installée doit être mise à jour ou réinstallée manuellement.</p>
+    <p><strong>Gravité :</strong> élevée pour la distribution &nbsp; <strong>État :</strong> corrigé.</p>
+    <p>Une APK installable a été générée après synchronisation Capacitor. Elle embarque le bundle local à jour, utilise l’API de production pour les données en ligne et ne charge pas le site distant. Le bouton de téléchargement Android est supprimé de l’application et du site.</p>
   </div>
 
   <h2>7. Vérifications réalisées</h2>
@@ -144,12 +146,13 @@
     <tr><td>Build frontend Vite</td><td class="ok">Réussi</td></tr>
     <tr><td>Tests API backend</td><td class="ok">6 réussis sur 6</td></tr>
     <tr><td>Reachability API Railway HTTPS</td><td class="ok">Serveur joignable</td></tr>
-    <tr><td>Publication GitHub</td><td class="ok">Branche main à jour, commit 6ac5599 ; APK version 1.1 générée</td></tr>
+    <tr><td>Build Android</td><td class="ok">Réussi ; APK installable générée après <code>npm run android:sync</code></td></tr>
+    <tr><td>Distribution APK</td><td class="ok"><code>https://egliseglorieuseduchrist.up.railway.app/app-egc.apk</code></td></tr>
   </table>
 
   <h2>8. Recommandations de mise en production</h2>
   <ol>
-    <li>Installer l’APK version 1.1 sur un téléphone sans connexion puis avec connexion pour vérifier les deux modes.</li>
+    <li>Installer la nouvelle APK sur un téléphone et vérifier que l’interface s’ouvre sans le site public ; puis tester les fonctions nécessitant l’API avec connexion.</li>
     <li>Tester une connexion admin, l’affichage des inscriptions, les filtres de départements et la modification d’une fiche.</li>
     <li>Remplacer les liens sociaux génériques par les liens officiels.</li>
     <li>Implémenter la soumission réelle des demandes de prière si cette fonctionnalité est prioritaire.</li>

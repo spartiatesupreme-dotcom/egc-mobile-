@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "android:sync": "node scripts/android-sync.mjs",
     "android:open": "cap open android",
+    "desktop:dev": "tauri dev",
+    "desktop:build": "tauri build",
     "server:dev": "npm --prefix backend run dev",
     "server:start": "npm --prefix backend start",
     "server:test": "npm --prefix backend test"
@@ -21,12 +23,14 @@
     "@capacitor/cli": "^8.5.3",
     "@capacitor/core": "^8.5.3",
     "@capacitor/local-notifications": "^8.3.1",
+    "@capacitor/network": "^8.0.1",
     "@capacitor/preferences": "^8.0.1",
     "@capacitor/status-bar": "^8.0.3",
     "@tailwindcss/vite": "^4.3.0",
     "axios": "^1.13.6",
     "framer-motion": "^12.38.0",
     "leaflet": "^1.9.4",
+    "localforage": "^1.10.0",
     "lucide-react": "^1.7.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -36,12 +40,11 @@
     "react-router-dom": "^7.13.2",
     "tailwindcss": "^4.3.0",
     "xlsx": "^0.18.5",
-    "zustand": "^5.0.12",
-    "@capacitor/network": "^8.0.1",
-    "localforage": "^1.10.0"
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@tauri-apps/cli": "^2.12.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",

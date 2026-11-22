@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Rapport de tests EGC — 12 novembre 2026</title>
+  <style>
+    @page { size: A4; margin: 14mm 15mm 15mm; }
+    * { box-sizing: border-box; }
+    body { font: 10pt/1.42 Arial, sans-serif; color: #1d2735; margin: 0; }
+    h1, h2, h3 { color: #173d72; margin: 0 0 8px; }
+    h1 { font-size: 28pt; line-height: 1.15; }
+    h2 { font-size: 17pt; border-bottom: 2px solid #e8b84d; padding-bottom: 5px; margin-top: 0; }
+    h3 { font-size: 11pt; margin-top: 12px; }
+    p { margin: 5px 0 9px; }
+    .cover { min-height: 260mm; display: flex; flex-direction: column; justify-content: space-between; }
+    .eyebrow { color: #97721f; font-weight: bold; text-transform: uppercase; letter-spacing: 1.4px; }
+    .subtitle { font-size: 14pt; color: #556477; }
+    .status { background: #fff3d4; border-left: 5px solid #d5a82f; padding: 11px 14px; margin: 18px 0; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .card { border: 1px solid #d8dee8; border-radius: 7px; padding: 10px 12px; background: #fbfcfe; }
+    .label { font-size: 8pt; color: #657185; text-transform: uppercase; font-weight: bold; }
+    .value { font-weight: bold; margin-top: 2px; }
+    .small { font-size: 8.5pt; color: #526071; }
+    .page { break-before: page; page-break-before: always; }
+    table { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+    th { text-align: left; color: white; background: #173d72; padding: 6px; }
+    td { vertical-align: top; border: 1px solid #d8dee8; padding: 5px 6px; }
+    tr { break-inside: avoid; page-break-inside: avoid; }
+    .status-ok { color: #17653b; font-weight: bold; }
+    .status-partial { color: #9a6411; font-weight: bold; }
+    .status-no { color: #775c5c; font-weight: bold; }
+    .note { background: #f2f5f9; padding: 9px 11px; border-radius: 6px; }
+    .evidence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+    figure { margin: 0 0 10px; break-inside: avoid; page-break-inside: avoid; }
+    figure img { display: block; max-width: 100%; max-height: 150mm; object-fit: contain; margin: 0 auto; border: 1px solid #d8dee8; }
+    figcaption { font-size: 8pt; color: #526071; margin-top: 4px; text-align: center; }
+    .cardproof img { width: 100%; max-height: 112mm; object-fit: contain; }
+    .routeproof img { width: 100%; height: auto; }
+    .phoneproof { align-items: start; }
+    .phoneproof .mainproof img { width: auto; height: 153mm; }
+    .phoneproof .liveproof img { width: 100%; max-height: 67mm; object-fit: contain; }
+    .phoneproof figure { text-align: center; }
+    .foot { font-size: 8pt; color: #677387; margin-top: 12px; }
+    ul { margin: 5px 0 10px 18px; padding: 0; }
+    li { margin: 3px 0; }
+    .decision { border: 2px solid #d5a82f; background: #fffaf0; padding: 12px; border-radius: 8px; }
+    .nowrap { white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div>
+      <div class="eyebrow">Église Glorieuse du Christ</div>
+      <h1>Rapport de tests<br>Application EGC</h1>
+      <p class="subtitle">Application Android et parcours web — campagne du 12 novembre 2026</p>
+      <div class="status">
+        <strong>Bilan : validation partielle.</strong>
+        Les parcours exécutés sont documentés; plusieurs contrôles métier et d'installation restent à réaliser.
+      </div>
+      <div class="grid">
+        <div class="card"><div class="label">Version Android</div><div class="value">1.3 (code 4) — com.egc.eglise</div></div>
+        <div class="card"><div class="label">Appareil</div><div class="value">TECNO CN5c — Android 16 / API 36</div></div>
+        <div class="card"><div class="label">Site web</div><div class="value">Production — viewport 390 × 844</div></div>
+        <div class="card"><div class="label">Date du rapport</div><div class="value">12 novembre 2026</div></div>
+      </div>
+      <h3>Objet</h3>
+      <p>Consigner les résultats observés sur Android et sur le site, notamment l'accès à la Bible hors ligne, l'état du module Live, les fiches « Trouver mon église » et l'ouverture des itinéraires. Les tests non exécutés sont explicitement séparés des réussites.</p>
+      <h3>Périmètre et méthode</h3>
+      <p>Essais fonctionnels non destructifs sur le téléphone et navigation du site en production. Les parcours pouvant enregistrer des données, envoyer un message ou déclencher un paiement n'ont pas été exécutés sans environnement de test autorisé.</p>
+    </div>
+    <div>
+      <div class="decision">
+        <strong>Décision proposée :</strong> GO sous réserves pour les seuls scénarios exécutés. Ne pas considérer la recette globale comme complète avant les essais listés en fin de rapport.
+      </div>
+      <p class="foot">Testeur et responsable de validation : à renseigner avant transmission.</p>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>Résultats d'exécution</h2>
+    <table>
+      <thead><tr><th style="width:9%">ID</th><th style="width:26%">Scénario</th><th>Résultat observé</th><th style="width:16%">Statut</th></tr></thead>
+      <tbody>
+        <tr><td>W-01</td><td>Navigation de 21 routes web</td><td>À 390 × 844, 21 réponses HTTP 200; pas d'erreur JavaScript de page ni de débordement horizontal constaté. Certains écrans paresseux nécessitent une attente.</td><td class="status-ok">Réussi</td></tr>
+        <tr><td>W-02</td><td>Événements</td><td>Filtre « Culte » et détail d'événement (date, lieu, heure) affichés.</td><td class="status-ok">Réussi</td></tr>
+        <tr><td>W-03</td><td>Thème</td><td>Passage clair/sombre puis retour au thème clair.</td><td class="status-ok">Réussi</td></tr>
+        <tr><td>W-04</td><td>Plan personnalisé</td><td>Sélection du thème « Guérison » affichée; aucune progression n'a été enregistrée.</td><td class="status-ok">Réussi, portée limitée</td></tr>
+        <tr><td>A-01</td><td>Lancement et plein écran</td><td>Application lancée sur TECNO CN5c; affichage plein écran observé.</td><td class="status-ok">Réussi</td></tr>
+        <tr><td>A-02</td><td>Bible hors ligne</td><td>Après coupure temporaire du Wi-Fi et des données mobiles du téléphone, bannière hors ligne visible et Genèse 1 consultable; réseau rétabli ensuite.</td><td class="status-ok">Réussi</td></tr>
+        <tr><td>A-03</td><td>Live sans direct actif</td><td>État « Aucun direct n'est en cours » et prédications archivées visibles le 12 novembre.</td><td class="status-ok">Réussi</td></tr>
+        <tr><td>A-04</td><td>Fiches de localisation v1.3</td><td>Brazzaville, Pointe-Noire et Oyo affichent les repères et numéros de téléphone.</td><td class="status-ok">Réussi</td></tr>
+        <tr><td>A-05</td><td>Liens d'itinéraire</td><td>Google Maps s'ouvre pour les trois fiches. Pointe-Noire résout vers l'hôtel Elais, repère de l'adresse; l'emplacement exact de l'église n'est pas confirmé indépendamment.</td><td class="status-partial">Partiel</td></tr>
+        <tr><td>A-06</td><td>Capture historique de direct</td><td>La capture du 8 novembre indique « Direct en cours » et montre le lecteur, mais ne prouve ni lecture effective ni comportement de la version 1.3.</td><td class="status-partial">Partiel</td></tr>
+        <tr><td>A-07</td><td>Plan et historique</td><td>Écrans consultés; enregistrement d'une progression et persistance de l'historique non vérifiés.</td><td class="status-partial">Partiel</td></tr>
+        <tr><td>A-08</td><td>Rappels</td><td>Écran consulté; permission et programmation d'une notification non vérifiées.</td><td class="status-partial">Partiel</td></tr>
+        <tr><td>A-09</td><td>Installation fraîche</td><td>Non exécutée; seul le parcours de mise à jour par-dessus la version déjà installée a été observé.</td><td class="status-no">Non exécuté</td></tr>
+        <tr><td>A-10</td><td>Lecture d'un direct v1.3</td><td>Aucun direct actif n'était disponible pendant l'essai du 12 novembre.</td><td class="status-no">Non exécuté</td></tr>
+        <tr><td>A-11</td><td>Parcours avec effets réels</td><td>Connexion à l'administration, envoi WhatsApp et paiement/don non exécutés.</td><td class="status-no">Non exécuté</td></tr>
+      </tbody>
+    </table>
+    <p class="foot">Comptage des scénarios fonctionnels agrégés : 8 réussis, 4 partiels et 3 non exécutés. Les contrôles techniques sont détaillés à la page suivante et ne sont pas inclus dans ce comptage.</p>
+  </section>
+
+  <section class="page">
+    <h2>Environnement, contrôles et réserves</h2>
+    <h3>Artefact Android</h3>
+    <p><strong>Paquet :</strong> com.egc.eglise · <strong>Version :</strong> 1.3 (4) · <strong>Min SDK :</strong> 24 · <strong>Target SDK :</strong> 36.</p>
+    <p><strong>APK publié :</strong> 63 711 375 octets; signature vérifiée. SHA-256 : <span class="small">421AC3CBA21AE31E32EFBEB0B1C35D14F655E72A80879FDB974F760F38B2439F</span><br>
+      <strong>Téléchargement :</strong> https://egliseglorieuseduchrist.up.railway.app/app-egc.apk</p>
+    <h3>Contrôles techniques</h3>
+    <ul>
+      <li>Build web : réussi; avertissement sur la taille de certains bundles Bible.</li>
+      <li>Tests backend : 6 réussis, 0 échec.</li>
+      <li>Build Android debug : réussi.</li>
+      <li>ESLint ciblé sur le composant de localisation : réussi.</li>
+      <li>ESLint complet : échec sur des erreurs réparties dans le dépôt et des assets générés; résultat distinct des scénarios fonctionnels.</li>
+    </ul>
+    <h3>Limites et suites requises</h3>
+    <ul>
+      <li>Tester une installation fraîche; la version 1.3 a été confirmée après mise à jour sur l'appareil.</li>
+      <li>Vérifier l'enregistrement d'une progression et sa présence dans l'historique.</li>
+      <li>Tester la permission et la réception d'un rappel planifié.</li>
+      <li>Refaire le test Live pendant un véritable direct, avec lecture effective du flux, sur la version 1.3.</li>
+      <li>Confirmer le point précis de l'église de Pointe-Noire au-delà du repère Hôtel Elais.</li>
+      <li>Ne tester administration, envois ou paiements qu'avec un compte et un environnement de test autorisés.</li>
+    </ul>
+    <p class="note"><strong>Limites observées :</strong> certaines rubriques web affichent « Bientôt disponible » ou un contenu à venir. Les interactions d'écriture n'ont pas été validées. Le résultat de Maps à Pointe-Noire est cohérent avec le repère fourni, mais ne prouve pas l'adresse exacte de l'église.</p>
+    <div class="decision">
+      <strong>Conclusion :</strong> validation partielle des parcours observés. Aucune anomalie fonctionnelle n'est confirmée dans ces scénarios; cela ne vaut pas validation de l'application entière.
+    </div>
+    <p class="foot">Signature testeur : ____________________ &nbsp;&nbsp; Validation responsable : ____________________ &nbsp;&nbsp; Date : __________</p>
+  </section>
+
+  <section class="page">
+    <h2>Preuves — fiches « Trouver mon église »</h2>
+    <p>Captures Android reçues le 12 novembre 2026. Les trois fiches et leurs repères sont visibles; les numéros affichés sont les coordonnées publiques des églises.</p>
+    <div class="evidence-grid cardproof">
+      <figure><img src="preuves-test-egc-2026-11-12/09-fiche-brazzaville.jpg"><figcaption>E-03 — Brazzaville : Église principale, repère et téléphone.</figcaption></figure>
+      <figure><img src="preuves-test-egc-2026-11-12/10-fiche-pointe-noire.jpg"><figcaption>E-04 — Pointe-Noire : repère Hôtel Elais / Pain de Sucre et téléphone.</figcaption></figure>
+      <figure><img src="preuves-test-egc-2026-11-12/11-fiche-oyo.jpg"><figcaption>E-05 — Oyo : mairie centrale et téléphone.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>Preuves — ouverture des itinéraires</h2>
+    <p>Les extraits ci-dessous montrent uniquement le libellé de destination dans Google Maps. Le départ et la carte ont été omis pour protéger la position de l'utilisateur.</p>
+    <div class="routeproof">
+      <figure><img src="preuves-test-egc-2026-11-12/12-destination-brazzaville.jpg"><figcaption>E-06 — Brazzaville : Église Glorieuse du Christ.</figcaption></figure>
+      <figure><img src="preuves-test-egc-2026-11-12/13-destination-pointe-noire.jpg"><figcaption>E-07 — Pointe-Noire : Hôtel Elais, repère indiqué dans la fiche.</figcaption></figure>
+      <figure><img src="preuves-test-egc-2026-11-12/14-destination-oyo.jpg"><figcaption>E-08 — Oyo : Mairie d'Oyo.</figcaption></figure>
+    </div>
+    <p class="note">Les itinéraires ont été ouverts; ces extraits ne permettent pas de valider la précision du trajet ni le point exact de l'église à Pointe-Noire.</p>
+  </section>
+
+  <section class="page">
+    <h2>Preuves — Bible hors ligne et module Live</h2>
+    <div class="evidence-grid phoneproof">
+      <figure class="mainproof"><img src="preuves-test-egc-2026-11-12/01-genese-hors-ligne.png"><figcaption>E-01 — Genèse 1 consultable avec la bannière hors connexion (12 novembre 2026).</figcaption></figure>
+      <div>
+        <figure class="liveproof"><img src="preuves-test-egc-2026-11-12/16-live-sans-direct-crop.jpg"><figcaption>E-02 — Aucun direct actif; les archives sont visibles (12 novembre 2026).</figcaption></figure>
+        <p class="small">La capture historique du 8 novembre indique « Direct en cours », mais ne prouve ni lecture effective ni version 1.3.</p>
+        <figure class="liveproof"><img src="preuves-test-egc-2026-11-12/17-live-historique-crop.jpg"><figcaption>E-09 — Lecteur Live historique; preuve partielle (8 novembre 2026).</figcaption></figure>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

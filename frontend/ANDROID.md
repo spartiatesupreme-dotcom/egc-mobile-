@@ -10,9 +10,9 @@
 
 1. Configure `VITE_API_URL` in a `.env.production` file with the HTTPS URL of
    the backend API. See `.env.example`.
-2. The Capacitor app loads the published site at
-   `https://egliseglorieuseduchrist.up.railway.app`, so site deployments appear
-   in the app without rebuilding the APK.
+2. The Capacitor app embeds the built `dist` bundle locally. It does not load
+   the published site remotely, so the APK remains independent of website
+   deployments. Online data uses the production API.
 3. From the `frontend/` directory, run `npm run android:sync`.
 4. Run `npm run android:open` or open the `android` folder in Android Studio.
 5. In Android Studio, wait for Gradle sync to finish, then choose **Build >
@@ -31,8 +31,9 @@ route; the videos will not load if the URL is missing, points to `localhost`,
 or the backend is not reachable from the phone. Production builds now stop
 with an error when `VITE_API_URL` is not configured. After changing the URL,
 build and install a new APK; an installed APK cannot pick up the setting. The
-remote-site app requires an internet connection to load. The backend must allow
-the published site's origin in `PUBLIC_ORIGINS`.
+embedded interface does not require the website to load. Internet is still
+required for live announcements, administration, registrations, donations,
+YouTube and map data.
 
 ## Backend access
 

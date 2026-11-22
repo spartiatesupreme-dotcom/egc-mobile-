@@ -30,9 +30,16 @@ export function openDatabase(databasePath) {
       phone TEXT NOT NULL,
       normalized_phone TEXT NOT NULL,
       email TEXT,
+      address TEXT NOT NULL DEFAULT '',
+      city TEXT NOT NULL DEFAULT '',
+      district TEXT NOT NULL DEFAULT '',
       answers_json TEXT NOT NULL,
       status TEXT NOT NULL DEFAULT 'pending'
         CHECK (status IN ('pending', 'confirmed', 'rejected')),
+      church_status TEXT NOT NULL DEFAULT '',
+      church_role TEXT NOT NULL DEFAULT '',
+      training_status TEXT NOT NULL DEFAULT ''
+        CHECK (training_status IN ('', 'in_progress', 'passed', 'failed')),
       created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
       UNIQUE (activity_key, normalized_phone)
@@ -62,8 +69,56 @@ export function openDatabase(databasePath) {
 
     CREATE INDEX IF NOT EXISTS registrations_status_id
       ON registrations(status, id DESC);
+    CREATE INDEX IF NOT EXISTS registrations_kind_id
+      ON registrations(registration_kind, id DESC);
     CREATE INDEX IF NOT EXISTS donations_status_id
       ON donation_intents(status, id DESC);
+  `);
+
+  const registrationColumns = new Set(
+    db.prepare("PRAGMA table_info(registrations)").all().map((column) => column.name),
+  );
+  for (const [column, definition] of [
+    ["address", "TEXT NOT NULL DEFAULT ''"],
+    ["city", "TEXT NOT NULL DEFAULT ''"],
+    ["district", "TEXT NOT NULL DEFAULT ''"],
+    ["church_status", "TEXT NOT NULL DEFAULT ''"],
+    ["church_role", "TEXT NOT NULL DEFAULT ''"],
+    ["training_status", "TEXT NOT NULL DEFAULT '' CHECK (training_status IN ('', 'in_progress', 'passed', 'failed'))"],
+  ]) {
+    if (!registrationColumns.has(column)) {
+      db.exec(`ALTER TABLE registrations ADD COLUMN ${column} ${definition}`);
+    }
+  }
+  db.exec(`
+    UPDATE registrations
+    SET address = COALESCE(NULLIF(json_extract(answers_json, '$.adresse'), ''),
+                           NULLIF(json_extract(answers_json, '$.address'), ''), address),
+        city = COALESCE(NULLIF(json_extract(answers_json, '$.ville'), ''),
+                        NULLIF(json_extract(answers_json, '$.city'), ''), city),
+        district = COALESCE(NULLIF(json_extract(answers_json, '$.arrondissement'), ''),
+                            NULLIF(json_extract(answers_json, '$.district'), ''), district),
+        church_status = COALESCE(NULLIF(json_extract(answers_json, '$.statut'), ''), church_status),
+        church_role = COALESCE(NULLIF(json_extract(answers_json, '$.services'), ''), church_role)
+    WHERE json_valid(answers_json)
+  `);
+  db.exec(`
+    UPDATE registrations
+    SET training_status = CASE
+      WHEN registration_kind = 'formation' AND training_status = '' THEN 'in_progress'
+      WHEN registration_kind = 'membership' THEN ''
+      ELSE training_status
+    END
+  `);
+  db.exec(`
+    CREATE INDEX IF NOT EXISTS registrations_church_status_id
+      ON registrations(church_status, id DESC);
+    CREATE INDEX IF NOT EXISTS registrations_church_role_id
+      ON registrations(church_role, id DESC);
+    CREATE INDEX IF NOT EXISTS registrations_training_status_id
+      ON registrations(training_status, id DESC);
+    CREATE INDEX IF NOT EXISTS registrations_status_church_status_role_id
+      ON registrations(status, church_status, church_role, id DESC);
   `);
 
   return db;

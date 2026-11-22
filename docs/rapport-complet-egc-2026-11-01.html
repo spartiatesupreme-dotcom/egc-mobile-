@@ -66,8 +66,9 @@
     synchrone et une seule instance est recommandée.
   </div>
   <ul>
-    <li><span class="ok">Frontend public Railway accessible :</span> <code>https://egliseglorieuseduchrist.up.railway.app</code>.</li>
+    <li><span class="warn">Frontend public Railway :</span> accessible, mais le domaine peut encore servir un ancien bundle jusqu'au prochain redéploiement.</li>
     <li><span class="ok">API de production accessible :</span> <code>https://egc-front-production.up.railway.app</code>.</li>
+    <li><span class="ok">APK Android distribuée :</span> <code>https://egliseglorieuseduchrist.up.railway.app/app-egc.apk</code>, avec bundle local autonome.</li>
     <li><span class="ok">Tests backend :</span> 6 tests réussis sur 6, dont 2 000 inscriptions simulées.</li>
     <li><span class="ok">Build frontend :</span> Vite réussi.</li>
     <li><span class="ok">Sécurité de base :</span> Helmet, CORS allowlist, JWT, bcrypt, Zod, requêtes paramétrées et rate limiting.</li>
@@ -107,7 +108,7 @@
     <tr><th>Service</th><th>Adresse / configuration</th><th>Rôle</th></tr>
     <tr><td>Frontend</td><td><code>egliseglorieuseduchrist.up.railway.app</code></td><td>Application React publique, servie par Vite preview sur le port Railway.</td></tr>
     <tr><td>API</td><td><code>egc-front-production.up.railway.app</code></td><td>Endpoints JSON, santé, annonces, vidéos, Live, inscriptions et administration.</td></tr>
-    <tr><td>Android</td><td>Capacitor</td><td>Bundle local Android ; les données distantes utilisent l'URL API de production.</td></tr>
+    <tr><td>Android</td><td>Capacitor</td><td>Bundle local embarqué dans l'APK ; l'application ne charge pas le site à distance. Les données distantes utilisent l'URL API de production.</td></tr>
     <tr><td>YouTube</td><td>Chaîne EGC TV</td><td>Direct et quatre dernières vidéos dont le titre contient « dimanche ».</td></tr>
   </table>
 
@@ -119,7 +120,7 @@
     <tr><td>Direct</td><td><code>/live</code></td><td>Interroge l'API Live, affiche l'état du direct, le lecteur YouTube et quatre prédications du dimanche.</td><td class="ok">OK avec dépendance YouTube</td></tr>
     <tr><td>Bible</td><td><code>/bible</code>, <code>/LectureBible</code></td><td>Lecture d'une Bible embarquée ; le contenu principal ne dépend pas de l'API.</td><td class="ok">OK</td></tr>
     <tr><td>À propos</td><td><code>/about</code></td><td>Informations d'identité et de présentation de l'église.</td><td class="ok">OK</td></tr>
-    <tr><td>Invitation</td><td><code>/invitation</code></td><td>Message WhatsApp et lien public EGC ; téléchargement Android dans la copie frontend déployée.</td><td class="ok">OK</td></tr>
+    <tr><td>Invitation</td><td><code>/invitation</code></td><td>Message WhatsApp et lien public EGC ; aucun bouton de téléchargement Android dans le site ni dans l'APK.</td><td class="ok">OK</td></tr>
     <tr><td>Localisation</td><td><code>/localisation</code></td><td>Carte de localisation de l'église.</td><td class="ok">OK avec dépendance carte/réseau</td></tr>
     <tr><td>Administration</td><td><code>/admin</code></td><td>Connexion JWT, listes paginées, filtrage, annonces, uploads et exports administratifs.</td><td class="ok">Protégé et testé</td></tr>
     <tr><td>Profil</td><td><code>/profile</code></td><td>Écran profil de l'application.</td><td class="ok">Accessible</td></tr>

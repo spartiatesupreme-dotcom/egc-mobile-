@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rapport complémentaire de recette EGC — 13 novembre 2026</title>
+  <style>
+    @page { size: A4; margin: 14mm 15mm; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #1d2735; font: 11pt/1.5 Arial, sans-serif; }
+    h1, h2, h3 { color: #173d72; margin: 0 0 8px; }
+    h1 { font-size: 25pt; line-height: 1.15; }
+    h2 { font-size: 16pt; border-bottom: 2px solid #e8b84d; padding-bottom: 5px; }
+    h3 { font-size: 11pt; margin-top: 13px; }
+    p { margin: 5px 0 9px; }
+    ul { margin: 5px 0 10px 18px; padding: 0; }
+    li { margin: 3px 0; }
+    .eyebrow { color: #97721f; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
+    .subtitle { color: #556477; font-size: 13pt; }
+    .summary, .note { border-left: 5px solid #d5a82f; background: #fff8e8; padding: 10px 12px; margin: 12px 0; }
+    .note { border-color: #7389a4; background: #f2f5f9; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .card { border: 1px solid #d8dee8; border-radius: 6px; background: #fbfcfe; padding: 9px 11px; }
+    .label { color: #657185; font-size: 8pt; font-weight: bold; text-transform: uppercase; }
+    .value { font-weight: bold; margin-top: 2px; }
+    table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+    th { color: white; background: #173d72; padding: 8px; text-align: left; }
+    td { border: 1px solid #d8dee8; padding: 8px; vertical-align: top; }
+    tr { break-inside: avoid; }
+    .ok { color: #17653b; font-weight: bold; }
+    .partial { color: #9a6411; font-weight: bold; }
+    .excluded { color: #59677a; font-weight: bold; }
+    .page { break-before: page; page-break-before: always; }
+    figure { margin: 0; text-align: center; break-inside: avoid; }
+    figure img { max-width: 100%; max-height: 165mm; object-fit: contain; border: 1px solid #d8dee8; }
+    figcaption { color: #526071; font-size: 9.5pt; margin-top: 6px; }
+    .evidence { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+    .foot { color: #677387; font-size: 8pt; margin-top: 12px; }
+    .small { color: #526071; font-size: 8.5pt; }
+    a { color: #173d72; }
+  </style>
+</head>
+<body>
+  <section>
+    <div class="eyebrow">Église Glorieuse du Christ</div>
+    <h1>Rapport complémentaire<br>de recette EGC</h1>
+    <p class="subtitle">Synthèse des campagnes fonctionnelles et Administration — 12 et 13 novembre 2026</p>
+    <div class="summary">
+      <strong>Conclusion :</strong> le module Admin Annonces a permis de créer, modifier puis supprimer
+      un brouillon de test. Après nettoyage, les compteurs sont revenus à leur état initial et le
+      brouillon de test n’est plus présent. La capture Live du Camon 50 Pro fournie par l’utilisateur
+      montre l’écran « Direct en cours »; la lecture effective n’est pas vérifiable par la capture seule.
+    </div>
+    <div class="grid">
+      <div class="card"><div class="label">Appareil — essais</div><div class="value">TECNO CN5c — Android 16 / API 36</div></div>
+      <div class="card"><div class="label">Capture Live terrain</div><div class="value">Camon 50 Pro — fournie par l’utilisateur</div></div>
+      <div class="card"><div class="label">Application</div><div class="value">EGC 1.3 (code 4) — com.egc.eglise</div></div>
+      <div class="card"><div class="label">Environnement</div><div class="value">Production — session Admin déjà ouverte</div></div>
+      <div class="card"><div class="label">Date des campagnes</div><div class="value">12 et 13 novembre 2026</div></div>
+    </div>
+
+    <h3>Périmètre convenu</h3>
+    <p>
+      Selon la clarification du responsable, <strong>Annonces est le seul module Admin actuellement actif</strong>.
+      Les écrans d’administration correspondant aux versions futures, ainsi que les rubriques publiques
+      « Bientôt disponible » (dont Inscription, Dons et Bibliothèque), sont exclus du périmètre et ne sont
+      pas déclarés en échec.
+    </p>
+    <p>
+      Les captures sont expurgées des textes de dossiers et informations personnelles. Aucun export de
+      données personnelles, paiement, don, envoi ou publication n’a été déclenché.
+    </p>
+
+    <h3>Résultats</h3>
+    <table>
+      <thead><tr><th style="width: 12%">ID</th><th style="width: 28%">Scénario</th><th>Résultat observé</th><th style="width: 14%">Statut</th></tr></thead>
+      <tbody>
+        <tr><td>ADM-01</td><td>Ouverture du module Annonces</td><td>La page de synthèse s’affiche. Session Admin existante utilisée; la saisie des identifiants n’a pas été retestée.</td><td class="ok">Réussi</td></tr>
+        <tr><td>ADM-02</td><td>Création d’un brouillon temporaire</td><td>Un contenu explicitement marqué TEST a été créé sans image, sans carrousel et avec « Publier immédiatement » décoché. Le statut « Brouillon » était visible.</td><td class="ok">Réussi</td></tr>
+        <tr><td>ADM-03</td><td>Modification du brouillon</td><td>Le titre du seul brouillon de test a été modifié; son statut est resté « Brouillon ».</td><td class="ok">Réussi</td></tr>
+        <tr><td>ADM-04</td><td>Nettoyage du test</td><td>Le brouillon temporaire a été supprimé. Le titre de test est absent; les compteurs sont revenus à Total 1, Brouillons 0, Carrousel 1.</td><td class="ok">Réussi</td></tr>
+        <tr><td>ADM-05</td><td>Option de publication par défaut</td><td>« Publier immédiatement » est cochée par défaut dans le formulaire vierge; après une sauvegarde, le formulaire réinitialisé revient à cet état. L’option a été décochée avant la création du brouillon.</td><td class="partial">Point de vigilance</td></tr>
+        <tr><td>ADM-06</td><td>Confirmation de suppression</td><td>La confirmation n’a pas été visible dans l’arbre d’accessibilité pendant cet essai automatisé. La suppression du seul brouillon test a été confirmée par son absence et le retour des compteurs initiaux.</td><td class="partial">Vérification limitée</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="page">
+    <h2>Vérifications complémentaires sur le téléphone</h2>
+    <table>
+      <thead><tr><th style="width: 22%">Parcours</th><th>Résultat observé</th><th style="width: 17%">Statut</th></tr></thead>
+      <tbody>
+        <tr><td>Filtres Événements</td><td>« Tous » et « Culte » affichent chacun 1 événement. Formation, Prière, Spéciaux et Retraite affichent 0 avec l’état vide prévu.</td><td class="ok">Réussi</td></tr>
+        <tr><td>Détail Célébration</td><td>La fiche affiche le type Culte, la date du dimanche 8 novembre, 9 h 30 et le lieu Yashab.</td><td class="ok">Réussi</td></tr>
+        <tr><td>Carte de Brazzaville</td><td>« Voir sur la carte » ouvre la fiche de l’église dans Google Maps. Aucun itinéraire ni partage de position n’a été lancé.</td><td class="ok">Réussi</td></tr>
+        <tr><td>Écran Live — capture terrain</td><td>Capture fournie par l’utilisateur, réalisée sur le terrain avec un Camon 50 Pro : écran Live, « Direct en cours » et lecteur YouTube visibles. L’icône lecture reste affichée; l’image seule ne confirme pas la lecture audio/vidéo effective.</td><td class="partial">Preuve partielle</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Point de vigilance — publication</h3>
+    <div class="note">
+      Le formulaire vierge revient avec « Publier immédiatement » activé. Le brouillon de test a bien été
+      créé en mode non publié; la capture après création montre séparément le brouillon (statut « Brouillon »)
+      et le formulaire vierge réinitialisé. Il faut donc vérifier cette case avant chaque nouvelle saisie.
+    </div>
+
+    <h3>Exclusions et limites</h3>
+    <ul>
+      <li>Les rubriques marquées « Bientôt disponible » et les modules Admin destinés aux versions futures sont hors périmètre, conformément à la consigne.</li>
+      <li>La connexion par identifiants Admin n’a pas été retestée : le téléphone disposait déjà d’une session autorisée.</li>
+      <li>Aucun dossier réel n’a été modifié; les opérations de statut, les exports contenant des données personnelles et les paiements n’ont pas été exécutés.</li>
+      <li>La capture terrain Camon 50 Pro est jointe. Elle confirme l’affichage du statut « Direct en cours », mais pas à elle seule la lecture effective; la capture historique du 8 novembre reste une preuve distincte.</li>
+    </ul>
+
+    <h3>Référence aux résultats antérieurs</h3>
+    <p>
+      Ce document est un complément et ne remplace ni ne réécrit les résultats précédents.
+      La <a href="./trame-rapport-test-egc.md">trame de tests</a> et le rapport d’homologation
+      conservé :
+      <a href="./rapport-homologation-v1-epure.pdf">rapport-homologation-v1-epure.pdf</a>.
+      La preuve historique Live du 8 novembre figure dans le dossier
+      <a href="./preuves-test-egc-2026-11-12/08-live-historique-2026-11-08.jpg">des preuves précédentes</a>.
+    </p>
+    <p class="foot">Décision : résultats fonctionnels antérieurs et essais Admin Annonces consignés; vigilance sur la case de publication par défaut et limite d’observation de la confirmation de suppression.</p>
+  </section>
+
+  <section class="page">
+    <h2>Trame — résultats fonctionnels antérieurs</h2>
+    <p class="small">Scénarios repris du rapport et de la trame du 12 novembre 2026; ils ne sont pas présentés comme de nouveaux essais du 13 novembre.</p>
+    <table>
+      <thead><tr><th style="width: 12%">ID</th><th style="width: 30%">Scénario</th><th>Résultat observé</th><th style="width: 16%">Statut</th></tr></thead>
+      <tbody>
+        <tr><td>W-01</td><td>Navigation web mobile</td><td>21 routes ont répondu HTTP 200 au viewport 390 × 844; aucune erreur JavaScript de page ni aucun débordement horizontal constaté. Certains écrans paresseux nécessitaient une attente.</td><td class="ok">Réussi</td></tr>
+        <tr><td>W-02</td><td>Événements web</td><td>Filtre « Culte » et détail d’un événement (date, lieu, heure) affichés.</td><td class="ok">Réussi</td></tr>
+        <tr><td>W-03</td><td>Thème</td><td>Passage du thème clair au sombre, puis retour au thème clair.</td><td class="ok">Réussi</td></tr>
+        <tr><td>W-04</td><td>Plan de lecture personnalisé</td><td>Le thème « Guérison » a été sélectionné et affiché. Aucune progression n’a été enregistrée; la persistance n’a donc pas été vérifiée.</td><td class="partial">Partiel</td></tr>
+        <tr><td>A-01</td><td>Lancement Android</td><td>L’application a été lancée sur TECNO CN5c; l’affichage plein écran a été observé.</td><td class="ok">Réussi</td></tr>
+        <tr><td>A-02</td><td>Bible hors connexion</td><td>Après coupure temporaire du Wi-Fi et des données mobiles, la bannière hors ligne était visible et Genèse 1 restait consultable. Le réseau a ensuite été rétabli.</td><td class="ok">Réussi</td></tr>
+        <tr><td>A-03</td><td>Live sans direct actif — 12 novembre</td><td>L’état « Aucun direct n’est en cours » et les prédications archivées étaient visibles.</td><td class="ok">Réussi</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="page">
+    <h2>Trame — localisation, rappels et exclusions</h2>
+    <table>
+      <thead><tr><th style="width: 12%">ID</th><th style="width: 30%">Scénario</th><th>Résultat observé</th><th style="width: 16%">Statut</th></tr></thead>
+      <tbody>
+        <tr><td>A-04</td><td>Fiches de localisation</td><td>Brazzaville, Pointe-Noire et Oyo affichaient leurs repères et numéros publics.</td><td class="ok">Réussi</td></tr>
+        <tr><td>A-05</td><td>Ouverture des itinéraires</td><td>Google Maps s’est ouvert pour les trois fiches. Pointe-Noire résolvait vers l’hôtel Elais, repère indiqué; le point exact de l’église n’a pas été confirmé indépendamment.</td><td class="partial">Partiel</td></tr>
+        <tr><td>A-06</td><td>Capture historique d’un direct — 8 novembre</td><td>La capture indique « Direct en cours » et montre le lecteur, sans prouver la lecture effective ni le comportement de la version 1.3.</td><td class="partial">Partiel</td></tr>
+        <tr><td>A-07</td><td>Plan et historique</td><td>Écrans consultés; enregistrement d’une progression et persistance de l’historique non vérifiés.</td><td class="partial">Partiel</td></tr>
+        <tr><td>A-08</td><td>Rappels</td><td>Écran consulté; permission, programmation et réception d’une notification non vérifiées.</td><td class="partial">Partiel</td></tr>
+        <tr><td>A-09</td><td>Installation fraîche</td><td>Non exécutée; seule la mise à jour par-dessus la version déjà installée a été observée.</td><td>Non exécuté</td></tr>
+        <tr><td>HORS-01</td><td>Formulaires/modules indisponibles</td><td>Inscription, dons, bibliothèque et autres modules Admin réservés aux versions futures sont hors périmètre à la demande du responsable. Aucune soumission, paiement ou modification de données n’a été réalisée.</td><td>Hors périmètre</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Les preuves détaillées de la campagne antérieure sont conservées dans le rapport d’homologation et sa trame; ce complément ne remplace pas ces documents.</p>
+  </section>
+
+  <section class="page">
+    <h2>Preuves — état et formulaire</h2>
+    <p class="small">Captures réalisées sur l’appareil; les informations non nécessaires au test ont été masquées.</p>
+    <div class="evidence">
+      <figure>
+        <img src="./preuves-admin-egc-2026-11-13/01-admin-annonces-synthese.png" alt="Synthèse Admin Annonces, données masquées">
+        <figcaption>E-01 — Synthèse initiale du module Annonces.</figcaption>
+      </figure>
+      <figure>
+        <img src="./preuves-admin-egc-2026-11-13/02-formulaire-annonce-brouillon.png" alt="Formulaire de brouillon, publication désactivée">
+        <figcaption>E-02 — Formulaire avant création; publication immédiate et carrousel désactivés.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>Preuves — création, modification et nettoyage</h2>
+    <div class="evidence">
+      <figure>
+        <img src="./preuves-admin-egc-2026-11-13/03-brouillon-cree.png" alt="Brouillon de test créé">
+        <figcaption>E-03 — Brouillon TEST visible avec son statut. La case cochée appartient au formulaire vierge réinitialisé, pas au brouillon.</figcaption>
+      </figure>
+      <figure>
+        <img src="./preuves-admin-egc-2026-11-13/04-brouillon-modifie.png" alt="Titre du brouillon de test modifié">
+        <figcaption>E-04 — Nouveau titre du brouillon après modification.</figcaption>
+      </figure>
+    </div>
+    <figure style="margin-top: 12px">
+      <img src="./preuves-admin-egc-2026-11-13/06-nettoyage-complete.png" alt="Compteurs restaurés après suppression du brouillon">
+      <figcaption>E-05 — Après nettoyage : Total 1, Brouillons 0, Carrousel 1; le brouillon de test n’est plus présent.</figcaption>
+    </figure>
+  </section>
+
+  <section class="page">
+    <h2>Preuve — Live sur le terrain</h2>
+    <p class="small">Capture fournie par l’utilisateur depuis son Camon 50 Pro. Elle montre l’écran Live et « Direct en cours »; l’icône lecture visible ne permet pas de confirmer la lecture effective du flux.</p>
+    <figure>
+      <img src="./preuves-admin-egc-2026-11-13/07-direct-camon-50-pro.jpg" alt="Écran Live montrant Direct en cours sur Camon 50 Pro">
+      <figcaption>E-06 — Écran Live sur Camon 50 Pro, capture terrain fournie par l’utilisateur.</figcaption>
+    </figure>
+  </section>
+</body>
+</html>
