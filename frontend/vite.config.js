@@ -37,7 +37,10 @@ export default defineConfig(({ mode }) => {
     },
     preview: {
       host: '0.0.0.0',
-      allowedHosts: ['egliseglorieuseduchrist.up.railway.app'],
+      allowedHosts: [
+        'egliseglorieuseduchrist.up.railway.app',
+        'egliseglorieuseduchrist2.up.railway.app',
+      ],
     },
     plugins: [react(),tailwindcss()],
   }

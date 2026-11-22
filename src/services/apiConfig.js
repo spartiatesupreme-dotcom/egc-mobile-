@@ -1,4 +1,4 @@
-const PRODUCTION_API_URL = "https://egc-front-production.up.railway.app";
+const PRODUCTION_API_URL = "https://egc-api-production-89c8acaf.up.railway.app";
 
 export const API_URL = (
   import.meta.env.VITE_API_URL

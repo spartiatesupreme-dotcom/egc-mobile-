@@ -9,7 +9,9 @@
 ## Open the project
 
 1. Configure `VITE_API_URL` in a `.env.production` file with the HTTPS URL of
-   the backend API. See `.env.example`.
+   the backend API (`https://egc-api-production-89c8acaf.up.railway.app` for
+   production). Set `VITE_APP_DOWNLOAD_URL` to the public site URL as well.
+   See `.env.example`.
 2. The Capacitor app embeds the built `dist` bundle locally. It does not load
    the published site remotely, so the APK remains independent of website
    deployments. Online data uses the production API.
@@ -69,9 +71,10 @@ MTN MoMo is not connected yet. The app can record an unpaid intent for the
 admin to review, but no payment is initiated or confirmed. Follow
 `../backend/README.md` before treating donations as received.
 
-## Downloading the APK from the Railway website
+## Publishing the APK
 
-The website's Android download button links to `/app-egc.apk`. Keep the APK at
-`frontend/public/app-egc.apk`; Vite copies it into the production build. Replace
-that file with the newly built APK and deploy the frontend service to update the
-download on Railway.
+The website's Android download button points to the latest GitHub Release asset
+named `EGC-Android.apk`. Upload the APK with that asset name so the button
+serves the latest version without storing the binary in the Git repository or
+Railway build. Use the original release signing key for public updates; a
+debug-signed APK may not update an existing production installation.

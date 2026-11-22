@@ -1,5 +1,6 @@
 export default function Invitation({ dark }) {
-  const downloadUrl = "https://egliseglorieuseduchrist.up.railway.app";
+  const downloadUrl = import.meta.env.VITE_APP_DOWNLOAD_URL
+    || "https://egliseglorieuseduchrist2.up.railway.app";
   const invitationMessage = `Bonjour ! Je t'invite à découvrir l'application de l'Église Glorieuse du Christ (EGC). Retrouve-la ici : ${downloadUrl}`;
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(invitationMessage)}`;
 
