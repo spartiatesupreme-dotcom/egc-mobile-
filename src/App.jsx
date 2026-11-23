@@ -972,7 +972,9 @@ useEffect(() => {
         className="app-header"
         style={{
           background: C.headerBg,
-          paddingTop: "calc(12px + env(safe-area-inset-top, 0px))",
+          paddingTop: Capacitor.isNativePlatform()
+            ? "12px"
+            : "calc(12px + env(safe-area-inset-top, 0px))",
           paddingRight: "20px",
           paddingBottom: "12px",
           paddingLeft: "20px",
@@ -1113,7 +1115,9 @@ useEffect(() => {
     margin: "0 auto",
      background: C.navBg,
           borderTop: `1px solid ${C.border}`,
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: `repeat(${NAV_ITEMS.length}, minmax(0, 1fr))`,
+          boxSizing: "border-box",
           transform: navVisible ? "translateY(0)" : "translateY(100%)",
           transition: "transform 0.35s cubic-bezier(0.4,0,0.2,1)",
           zIndex: 20,
@@ -1132,10 +1136,12 @@ useEffect(() => {
               className="app-nav-item"
               aria-current={active ? "page" : undefined}
               style={{
-                flex: 1,
+                width: "100%",
+                minWidth: 0,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "center",
                 padding: "9px 0 10px",
                 background: "none",
                 border: "none",
