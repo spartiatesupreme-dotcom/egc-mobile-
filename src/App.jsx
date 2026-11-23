@@ -33,7 +33,6 @@ import {
 } from "./components/carouselSlides";
 import {
   FEATURES,
-  FUTURE_FEATURES,
   NAV_ITEMS,
   RAILWAY_ADMIN_FEATURE,
 } from "./components/homeConfig";
@@ -363,7 +362,6 @@ export default function EgliseFoiVictoire() {
   const [panelTransitionReady, setPanelTransitionReady] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const [activeFeature, setActiveFeature] = useState(null);
-  const [futureVersionsOpen, setFutureVersionsOpen] = useState(false);
   const lastScrollY = useRef(0);
   const scrollRef = useRef(null);
   const touchStartX = useRef(null);
@@ -517,7 +515,6 @@ useEffect(() => {
     textSub: dark ? "#c0cad8" : "#6e6e73",
     border: dark ? "#35445a" : "#d2d2d7",
     navBg: dark ? "#141f2e" : "#ffffff",
-    headerBg: dark ? "#141f2e" : "#ffffff",
   };
 
   const visibleSlides = carouselSlides.slice(0, MAX_CAROUSEL_SLIDES);
@@ -577,10 +574,14 @@ useEffect(() => {
 
   const renderHome = () => (
     <div className="home-dashboard">
-      <section className="home-welcome" aria-label="Bienvenue">
-        <span className="home-eyebrow">UNE COMMUNAUTÉ DE FOI</span>
-        <h1>Bienvenue chez vous</h1>
-        <p>Croître jusqu’à manifester Christ dans sa plénitude.</p>
+      <section className="home-welcome" aria-label="Église Glorieuse du Christ">
+        <img className="home-welcome-logo" src={logo} alt="Logo EGC" />
+        <div className="home-welcome-copy">
+          <span className="home-eyebrow">UNE COMMUNAUTÉ DE FOI</span>
+          <h1 className="home-welcome-title-mobile">Bienvenue chez vous</h1>
+          <h1 className="home-welcome-title-desktop">Église Glorieuse du Christ</h1>
+          <p>Croître jusqu’à manifester Christ dans sa plénitude.</p>
+        </div>
       </section>
 
       <section
@@ -779,12 +780,11 @@ useEffect(() => {
         )}
       </section>
 
-      <section className="home-verse" aria-label="Verset du jour">
-        <div className="home-verse-mark" aria-hidden="true">
-          <Icon name="bible" size={20} color="#e1c36f" />
-        </div>
-        <div>
-          <span className="home-verse-reference">LA PAROLE DU JOUR · ACTES 1:8</span>
+      <section className="home-verse" aria-label="Verset de l’Église">
+        <img className="home-verse-watermark" src={logo} alt="" aria-hidden="true" />
+        <img className="home-verse-logo" src={logo} alt="Logo EGC" />
+        <div className="home-verse-content">
+          <span className="home-verse-reference">VERSET DE L’ÉGLISE · ACTES 1:8</span>
           <p>
             « Vous serez mes témoins à Jérusalem, dans toute la Judée, dans la
             Samarie, et jusqu’aux extrémités de la terre. »
@@ -792,7 +792,7 @@ useEffect(() => {
         </div>
       </section>
 
-      <section className="home-section">
+      <section className="home-section home-explore">
         <div className="home-section-heading">
           <div>
             <span className="home-eyebrow">À PORTÉE DE MAIN</span>
@@ -816,73 +816,33 @@ useEffect(() => {
                 <span className="home-feature-icon">
                   <Icon
                     name={feature.icon}
-                    size={21}
+                    size={24}
                     color={active ? "#fff" : dark ? "#a8c9f4" : C.primary}
                   />
                 </span>
-                <span className="home-feature-label">{feature.label}</span>
+                <span className="home-feature-copy">
+                  <span className="home-feature-title">
+                    <span className="home-feature-label">{feature.label}</span>
+                    {feature.id === "media" && (
+                      <span
+                        className="home-feature-live-dot"
+                        role="img"
+                        aria-label="Accès au direct"
+                      />
+                    )}
+                  </span>
+                  {feature.description && (
+                    <span className="home-feature-description">{feature.description}</span>
+                  )}
+                </span>
                 <span className="home-feature-arrow" aria-hidden="true">
-                  <Icon name="chevronRight" size={15} color={active ? "#fff" : C.textSub} />
+                  <Icon name="chevronRight" size={19} color={active ? "#fff" : C.text} />
                 </span>
                 {feature.contenu && <span className="home-feature-badge">{feature.contenu}</span>}
               </button>
             );
           })}
         </div>
-      </section>
-
-      <section className="home-section">
-        <button
-          type="button"
-          className="home-section-heading"
-          aria-expanded={futureVersionsOpen}
-          aria-controls="future-versions-list"
-          data-section="future-versions"
-          onClick={() => setFutureVersionsOpen((open) => !open)}
-          style={{
-            width: "100%",
-            border: 0,
-            padding: 0,
-            background: "transparent",
-            color: "inherit",
-            textAlign: "left",
-            cursor: "pointer",
-          }}
-        >
-          <div>
-            <span className="home-eyebrow">À VENIR</span>
-            <h2>Nos futures versions</h2>
-          </div>
-          <span className="home-section-count">{String(FUTURE_FEATURES.length).padStart(2, "0")}</span>
-        </button>
-        {futureVersionsOpen && <div id="future-versions-list" className="home-feature-grid">
-          {FUTURE_FEATURES.map((feature) => {
-            const active = activeFeature === feature.id;
-            return (
-              <button
-                key={feature.id}
-                type="button"
-                className={`home-feature${active ? " is-active" : ""}`}
-                onClick={() => {
-                  setActiveFeature(feature.id);
-                  navigate(feature.path);
-                }}
-              >
-                <span className="home-feature-icon">
-                  <Icon
-                    name={feature.icon}
-                    size={21}
-                    color={active ? "#fff" : dark ? "#a8c9f4" : C.primary}
-                  />
-                </span>
-                <span className="home-feature-label">{feature.label}</span>
-                <span className="home-feature-arrow" aria-hidden="true">
-                  <Icon name="chevronRight" size={15} color={active ? "#fff" : C.textSub} />
-                </span>
-              </button>
-            );
-          })}
-        </div>}
       </section>
 
       <section className="home-section home-news">
@@ -939,7 +899,7 @@ useEffect(() => {
 
   return (
     <div
-      className={`app-shell${hideLayout ? " app-shell-fullscreen" : ""}${location.pathname === "/admin" ? " app-shell-admin" : ""}`}
+      className={`app-shell${hideLayout ? " app-shell-fullscreen" : ""}${location.pathname === "/admin" ? " app-shell-admin" : ""}${activeNav === "home" ? " app-shell-home" : ""}`}
       style={{
         "--app-bg": C.bg,
         "--app-card": C.card,
@@ -951,6 +911,7 @@ useEffect(() => {
         "--app-primary": C.primary,
         maxWidth:
   hideLayout ||
+  activeNav === "home" ||
   activeNav === "LectureBible" ||
   activeNav === "PlanDeLecture" ||
   activeNav === "plan-lecture-personnalise"
@@ -971,12 +932,11 @@ useEffect(() => {
       <header
         className="app-header"
         style={{
-          background: C.headerBg,
-          paddingTop: "calc(12px + env(safe-area-inset-top, 0px))",
+          background: dark ? "rgba(20, 31, 46, 0.92)" : "rgba(255, 255, 255, 0.9)",
+          paddingTop: "calc(10px + env(safe-area-inset-top, 0px))",
           paddingRight: "20px",
-          paddingBottom: "12px",
+          paddingBottom: "10px",
           paddingLeft: "20px",
-          borderBottom: `1px solid ${C.border}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -1013,6 +973,15 @@ useEffect(() => {
           >
             <Icon name={dark ? "sun" : "moon"} size={17} color={C.accent} />
             <span>{dark ? "Sombre" : "Clair"}</span>
+          </button>
+          <button
+            type="button"
+            className={`profile-header-button${activeNav === "profile" ? " is-active" : ""}`}
+            aria-label="Ouvrir Mon Profil"
+            onClick={() => navigate("/profile")}
+          >
+            <Icon name="profile" size={17} color={C.primary} />
+            <span>Mon Profil</span>
           </button>
         </div>
       </header>)}

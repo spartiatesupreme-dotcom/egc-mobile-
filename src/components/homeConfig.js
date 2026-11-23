@@ -1,10 +1,46 @@
 export const FEATURES = [
-  { id: "events", label: "Événements", icon: "calendar", path: "/events" },
-  { id: "media", label: "Direct", icon: "media", path: "/live" },
-  { id: "bible_online", label: "Bible", icon: "bible", path: "/bible" },
-  { id: "about", label: "À Propos", icon: "about", path: "/about" },
-  { id: "invitation", label: "Invitation", icon: "members", path: "/invitation" },
-  { id: "find_church", label: "Trouver mon église", icon: "location", path: "/localisation" },
+  {
+    id: "events",
+    label: "Événements",
+    description: "Calendrier et rencontres",
+    icon: "calendar",
+    path: "/events",
+  },
+  {
+    id: "media",
+    label: "Direct",
+    description: "Suivre le culte en ligne",
+    icon: "media",
+    path: "/live",
+  },
+  {
+    id: "bible_online",
+    label: "Bible",
+    description: "Lire et méditer la Parole",
+    icon: "bible",
+    path: "/bible",
+  },
+  {
+    id: "about",
+    label: "À Propos",
+    description: "Notre vision et histoire",
+    icon: "about",
+    path: "/about",
+  },
+  {
+    id: "invitation",
+    label: "Invitation",
+    description: "Inviter un proche",
+    icon: "members",
+    path: "/invitation",
+  },
+  {
+    id: "find_church",
+    label: "Trouver mon église",
+    description: "Horaires et adresses",
+    icon: "location",
+    path: "/localisation",
+  },
 ];
 
 export const RAILWAY_ADMIN_FEATURE = {

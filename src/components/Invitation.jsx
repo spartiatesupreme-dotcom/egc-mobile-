@@ -3,6 +3,9 @@ export default function Invitation({ dark }) {
     || "https://egliseglorieuseduchrist2.up.railway.app";
   const invitationMessage = `Bonjour ! Je t'invite à découvrir l'application de l'Église Glorieuse du Christ (EGC). Retrouve-la ici : ${downloadUrl}`;
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(invitationMessage)}`;
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(downloadUrl)}&quote=${encodeURIComponent(invitationMessage)}`;
+  const messageUrl = `sms:?body=${encodeURIComponent(invitationMessage)}`;
+  const emailUrl = `mailto:?subject=${encodeURIComponent("Découvre l’application EGC")}&body=${encodeURIComponent(invitationMessage)}`;
 
   const colors = {
     background: dark ? "#242426" : "#ffffff",
@@ -40,29 +43,39 @@ export default function Invitation({ dark }) {
           Invitez vos proches
         </h1>
         <p style={{ color: colors.muted, lineHeight: 1.6, margin: "0 0 20px" }}>
-          Partagez l’application EGC avec vos contacts. WhatsApp s’ouvrira avec
-          un message prêt à envoyer ; vous pourrez choisir le contact ou le
-          groupe.
+          Partagez l’application EGC avec vos proches par WhatsApp, Facebook,
+          message ou e-mail.
         </p>
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
           style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: 48,
-            padding: "0 20px",
-            borderRadius: 12,
-            background: "#25D366",
-            color: "#ffffff",
-            fontWeight: 700,
-            textDecoration: "none",
+            display: "grid",
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+            gap: 10,
           }}
         >
-          Inviter via WhatsApp
-        </a>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={shareButtonStyle("#25D366")}
+          >
+            WhatsApp
+          </a>
+          <a
+            href={facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={shareButtonStyle("#1877F2")}
+          >
+            Facebook
+          </a>
+          <a href={messageUrl} style={shareButtonStyle("#173b70")}>
+            Message
+          </a>
+          <a href={emailUrl} style={shareButtonStyle("#c9a84c", "#17233b")}>
+            E-mail
+          </a>
+        </div>
         <p
           style={{
             color: colors.muted,
@@ -77,4 +90,21 @@ export default function Invitation({ dark }) {
       </section>
     </main>
   );
+}
+
+function shareButtonStyle(background, color = "#ffffff") {
+  return {
+    display: "inline-flex",
+    minWidth: 0,
+    minHeight: 48,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "0 12px",
+    borderRadius: 12,
+    background,
+    color,
+    fontSize: 14,
+    fontWeight: 700,
+    textDecoration: "none",
+  };
 }

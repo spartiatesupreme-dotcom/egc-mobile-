@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FUTURE_FEATURES } from "./homeConfig.js";
 
 // ============================================================
 // ICONS
@@ -680,6 +681,36 @@ export const ProfileScreen = ({ dark }) => {
           </div>
         </Link>
       ))}
+
+      <section className="profile-future-versions" aria-labelledby="profile-future-title">
+        <div className="profile-future-heading">
+          <div>
+            <span className="home-eyebrow">À VENIR</span>
+            <h2 id="profile-future-title">Nos futures versions</h2>
+          </div>
+          <span className="home-section-count">
+            {String(FUTURE_FEATURES.length).padStart(2, "0")}
+          </span>
+        </div>
+        <div className="profile-future-grid">
+          {FUTURE_FEATURES.map((feature) => (
+            <Link
+              key={feature.id}
+              to={feature.path}
+              className="profile-future-card"
+            >
+              <span className="profile-future-icon" aria-hidden="true">
+                <Icon name={feature.icon} size={23} />
+              </span>
+              <span className="profile-future-copy">
+                <strong>{feature.label}</strong>
+                <small>Prévu dans une prochaine version</small>
+              </span>
+              <span className="profile-future-status">À venir</span>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
