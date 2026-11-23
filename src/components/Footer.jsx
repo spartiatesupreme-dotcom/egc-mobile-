@@ -11,6 +11,8 @@ import {
 import { Capacitor } from "@capacitor/core";
 
 export default function Footer({ dark }) {
+  if (Capacitor.isNativePlatform()) return null;
+
   const C = {
     bg: dark ? "#1c1c1e" : "#ffffff",
     card: dark ? "#14243a" : "#f5f5f7",
