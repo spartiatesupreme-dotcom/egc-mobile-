@@ -2474,9 +2474,9 @@ html[data-theme="dark"] .personalized-plan-check input {
 
   .home-hero-announcement-image {
     inset: 0 0 0 auto;
-    width: 56%;
+    width: 58%;
     height: 100%;
-    padding: 66px 28px 48px 0;
+    padding: 66px 22px 40px 0;
     object-fit: contain;
     object-position: center right;
   }
@@ -2486,25 +2486,37 @@ html[data-theme="dark"] .personalized-plan-check input {
       linear-gradient(
         90deg,
         rgba(6, 14, 30, 0.98) 0%,
-        rgba(6, 14, 30, 0.94) 39%,
-        rgba(6, 14, 30, 0.72) 49%,
-        rgba(6, 14, 30, 0.12) 62%,
-        transparent 74%
+        rgba(6, 14, 30, 0.96) 34%,
+        rgba(6, 14, 30, 0.58) 43%,
+        rgba(6, 14, 30, 0.12) 50%,
+        transparent 58%
       ),
-      linear-gradient(0deg, rgba(5, 12, 26, 0.52), transparent 46%);
+      linear-gradient(0deg, rgba(5, 12, 26, 0.18), transparent 46%);
   }
 
   .home-hero-announcement-content {
-    width: min(46%, 600px);
+    width: min(40%, 540px);
+  }
+
+  .home-hero-announcement-content h2 {
+    max-width: 500px;
+    margin: 8px 0 6px;
+    font-size: clamp(24px, 2.8vw, 34px);
   }
 
   .home-hero-speaker {
+    margin-bottom: 8px;
     border-color: rgba(240, 214, 142, 0.54);
     background: rgba(12, 24, 45, 0.84);
   }
 
   .home-hero-speaker strong {
     font-size: 14px;
+  }
+
+  .home-hero-announcement-description {
+    margin-bottom: 12px;
+    -webkit-line-clamp: 1;
   }
 
   .home-verse {
